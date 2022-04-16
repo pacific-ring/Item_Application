@@ -1,6 +1,5 @@
 package com.manmohan.zivame.ui.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -64,18 +63,25 @@ internal class ProductListAdapter(private val product : Products,
             itemRating.rating = itemRating.rating
 
             if (selectedItem.contains(item))
-                addBtn.text = "Added"
+                addBtn.text = "Remove"
             else
                 addBtn.text = "Add"
 
             addBtn.setOnClickListener {
-               listener.onClick(item)
+                if (addBtn.text.equals("Add"))
+                     listener.onAdd(item)
+
+                if (addBtn.text.equals("Remove"))
+                    listener.onRemove(item)
+
             }
         }
     }
 
 
     interface OnItemClick{
-        fun onClick(item : Item)
+        fun onAdd(item : Item)
+        fun onRemove(item : Item)
+
     }
 }

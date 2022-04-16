@@ -19,8 +19,8 @@
             <ImageView
                 android:id="@+id/item_image"
                 android:layout_width="100dp"
-                android:layout_height="120dp"
-                android:src="@drawable/cart_icon" />
+                android:scaleType="fitCenter"
+                android:layout_height="120dp" />
 
 
             <TextView
@@ -35,7 +35,7 @@
                 android:gravity="center_vertical"
                 android:maxLines="1"
                 android:paddingStart="4dp"
-                android:text="OnePlus 6"
+                android:paddingEnd="2dp"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
@@ -52,7 +52,7 @@
                 android:gravity="center_vertical"
                 android:maxLines="1"
                 android:paddingStart="4dp"
-                android:text="(Red, 8GB RAM + 128GB Memory)"
+                android:paddingEnd="2dp"
                 android:textColor="#BE0C0C0C"
                 android:textSize="16sp" />
 
@@ -70,7 +70,7 @@
                 android:gravity="center_vertical"
                 android:maxLines="1"
                 android:paddingStart="4dp"
-                android:text="9000"
+                android:paddingEnd="2dp"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -85,25 +85,24 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="4dp"
                 android:layout_toEndOf="@id/item_image"
+                android:numStars="5"
                 android:progressTint="@color/black"
-                android:rating="3.5"
-                android:numStars="5"/>
+                android:rating="3.5" />
 
 
-             <Button
-                 android:id="@+id/add_item"
-                 android:layout_width="64dp"
-                 android:layout_height="40dp"
-                 android:padding="4dp"
-                 android:layout_alignParentEnd="true"
-                 android:layout_alignParentBottom="true"
-                 android:layout_marginEnd="12dp"
-                 android:layout_marginBottom="4dp"
-                 android:text="Add"
-                 android:backgroundTint="@color/black"
-                 android:textColor="@color/white"
-                 android:fontFamily="@font/allan_bold"/>
-
+            <Button
+                android:id="@+id/add_item"
+                android:layout_width="64dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="4dp"
+                android:backgroundTint="@color/black"
+                android:fontFamily="@font/allan_bold"
+                android:padding="4dp"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
 
 
         </RelativeLayout>

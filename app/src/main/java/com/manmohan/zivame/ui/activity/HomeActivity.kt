@@ -1,6 +1,7 @@
 package com.manmohan.zivame.ui.activity
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -21,11 +22,11 @@ import javax.inject.Inject
 class HomeActivity : AppCompatActivity() {
     private lateinit var homeScreenActivityComponent: HomeScreenActivityComponent
     private lateinit var homeActivityViewModel: HomeViewModel
-    private lateinit var binding : ActivityMainBinding
-    private lateinit var homeItemAdapter : ProductListAdapter
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var homeItemAdapter: ProductListAdapter
 
-    companion object{
-        private val itemSelected : ArrayList<Item> = arrayListOf()
+    companion object {
+        private val itemSelected: ArrayList<Item> = arrayListOf()
     }
 
     @Inject
@@ -47,31 +48,52 @@ class HomeActivity : AppCompatActivity() {
     }
 
 
-
     private fun initializeViewModel() {
         homeActivityViewModel = ViewModelProvider(this, homeActivityViewModelFactory)
-            .get(HomeViewModel :: class.java)
+            .get(HomeViewModel::class.java)
     }
 
     private fun fetchProductData() = homeActivityViewModel.getProductData()
 
     private fun setObservers() {
-       homeActivityViewModel.product.observe(this, Observer {
-                initializeRecyclerView(it!!)
-       })
+        homeActivityViewModel.product.observe(this, Observer {
+            initializeRecyclerView(it!!)
+        })
     }
 
     private fun initializeRecyclerView(it: Products) {
         homeItemAdapter = ProductListAdapter(it, itemSelected, object :
             ProductListAdapter.OnItemClick {
-            override fun onClick(item: Item) {
+            override fun onAdd(item: Item) {
                 itemAddedToCart(item)
+                setNotificationBadge()
+            }
+
+            override fun onRemove(item: Item) {
+                removeItemFromCart(item)
+                setNotificationBadge()
             }
         })
         binding.productListRv.apply {
             this.layoutManager = LinearLayoutManager(this@HomeActivity)
             this.itemAnimator = DefaultItemAnimator()
             this.adapter = homeItemAdapter
+        }
+    }
+
+    private fun removeItemFromCart(item: Item) {
+        if (itemSelected.contains(item)) {
+            itemSelected.remove(item)
+            homeItemAdapter.notifyDataSetChanged()
+        }
+    }
+
+    private fun setNotificationBadge() {
+        if (itemSelected.isNullOrEmpty()) {
+            binding.notificationBadgeTv.visibility = View.GONE
+        } else {
+            binding.notificationBadgeTv.visibility = View.VISIBLE
+            binding.selectedItemCount = itemSelected.size.toString()
         }
     }
 
