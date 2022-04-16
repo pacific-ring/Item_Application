@@ -8,13 +8,11 @@ import com.manmohan.zivame.model.Item
 import com.manmohan.zivame.model.Products
 
 class CartActivity : AppCompatActivity() {
+
+    private lateinit var selectedItemList : List<Item>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)
-        val mlist : ArrayList<Item> = intent.getSerializableExtra("productList") as ArrayList<Item>
-
-        mlist.forEach { item ->
-            Log.e("MMG", item.name)
-        }
+        selectedItemList = intent.getSerializableExtra("productList") as ArrayList<Item>
     }
 }

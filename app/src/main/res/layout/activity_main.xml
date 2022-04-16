@@ -32,6 +32,7 @@
                 android:fontFamily="@font/allan_bold"
                 android:gravity="center"
                 android:text="@string/header_text"
+                android:letterSpacing="0.1"
                 android:textColor="@color/black"
                 android:textSize="24sp" />
 
@@ -78,7 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/header"
-            tools:listitem="@layout/item_layout"/>
+            tools:listitem="@layout/item_layout" />
 
     </RelativeLayout>
 </layout>
