@@ -14,5 +14,6 @@ data class Item(
     val price: String,
     @SerializedName("rating")
     val rating: Int,
-    val qty : Int =1
+
+    var qty : Int = 1
 ) : Serializable
