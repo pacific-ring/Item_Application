@@ -4,14 +4,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activity.HomeActivity">
+        tools:context=".ui.activity.HomeActivity">
 
         <RelativeLayout
             android:id="@+id/header"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:background="@color/white"
-            android:stateListAnimator="@animator/toolbar_animation">
+            android:elevation="6dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -19,7 +19,7 @@
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/allan_bold"
                 android:gravity="center"
-                android:text="Zivame"
+                android:text="@string/header_text"
                 android:textColor="@color/black"
                 android:textSize="24sp" />
 
@@ -37,5 +37,14 @@
 
             </RelativeLayout>
         </RelativeLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/product_list_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/header"
+            tools:listitem="@layout/item_layout"/>
+
     </RelativeLayout>
 </layout>
