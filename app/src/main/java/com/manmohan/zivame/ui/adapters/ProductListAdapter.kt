@@ -1,6 +1,5 @@
 package com.manmohan.zivame.ui.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,18 +20,21 @@ internal class ProductListAdapter(private val product : Products,
                                   private val listener : OnItemClick)
     : RecyclerView.Adapter<ProductListAdapter.ProductItemHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductItemHolder {
+    override fun onCreateViewHolder(parent: ViewGroup,
+                                    viewType: Int): ProductItemHolder {
         val inflatedView = parent.inflate(R.layout.item_layout, false)
         return ProductItemHolder(inflatedView)
     }
 
     //Extension Function to inflate the parent layout
-    private fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false): View {
+    private fun ViewGroup.inflate(@LayoutRes layoutRes: Int,
+                                  attachToRoot: Boolean = false): View {
         return LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
     }
 
 
-    override fun onBindViewHolder(holder: ProductItemHolder, position: Int) {
+    override fun onBindViewHolder(holder: ProductItemHolder,
+                                  position: Int) {
         holder.bindData(product.items[position])
     }
 
@@ -41,7 +43,9 @@ internal class ProductListAdapter(private val product : Products,
 
 
 
-    internal inner class ProductItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    internal inner class ProductItemHolder(itemView: View)
+        : RecyclerView.ViewHolder(itemView) {
+
         private var itemImage : ImageView = itemView.findViewById(R.id.item_image)
         private var itemName : TextView = itemView.findViewById(R.id.item_name)
         private var itemSubHead : TextView = itemView.findViewById(R.id.item_sub_detail)
@@ -64,18 +68,25 @@ internal class ProductListAdapter(private val product : Products,
             itemRating.rating = itemRating.rating
 
             if (selectedItem.contains(item))
-                addBtn.text = "Added"
+                addBtn.text = "Remove"
             else
                 addBtn.text = "Add"
 
             addBtn.setOnClickListener {
-               listener.onClick(item)
+                if (addBtn.text.equals("Add"))
+                     listener.onAdd(item)
+
+                if (addBtn.text.equals("Remove"))
+                    listener.onRemove(item)
+
             }
         }
     }
 
 
     interface OnItemClick{
-        fun onClick(item : Item)
+        fun onAdd(item : Item)
+        fun onRemove(item : Item)
+
     }
 }

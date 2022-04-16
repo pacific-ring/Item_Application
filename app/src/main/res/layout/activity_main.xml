@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
+  <data>
+      <import type="android.view.View"/>
+      <variable
+          name="selectedItemCount"
+          type="String" />
+
+      <variable
+          name="activity"
+          type="com.manmohan.zivame.ui.activity.HomeActivity" />
+
+  </data>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -24,9 +36,11 @@
                 android:textSize="24sp" />
 
             <RelativeLayout
+                android:id="@+id/cart_container"
                 android:layout_width="48dp"
                 android:layout_height="match_parent"
-                android:layout_alignParentEnd="true">
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="8dp">
 
                 <ImageView
                     android:id="@+id/cart_icon"
@@ -34,6 +48,26 @@
                     android:layout_height="24dp"
                     android:layout_centerInParent="true"
                     android:src="@drawable/cart_icon" />
+
+
+                <TextView
+                    android:id="@+id/notification_badge_tv"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/badge_background"
+                    android:elevation="2dp"
+                    android:fontFamily="@font/allan"
+                    android:gravity="center"
+                    android:text="@{selectedItemCount}"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
 
             </RelativeLayout>
         </RelativeLayout>

@@ -2,6 +2,8 @@ package com.manmohan.zivame.model
 
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
+
 
 data class Item(
     @SerializedName("image_url")
@@ -12,4 +14,4 @@ data class Item(
     val price: String,
     @SerializedName("rating")
     val rating: Int
-)
+) : Serializable
