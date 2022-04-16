@@ -24,10 +24,7 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var homeActivityViewModel: HomeViewModel
     private lateinit var binding: ActivityMainBinding
     private lateinit var homeItemAdapter: ProductListAdapter
-
-    companion object {
-        private val itemSelected: ArrayList<Item> = arrayListOf()
-    }
+    private val itemSelected: ArrayList<Item> = arrayListOf()
 
     @Inject
     lateinit var homeActivityViewModelFactory: HomeViewModelFactory
@@ -35,32 +32,49 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
         initialize()
         initializeViewModel()
         fetchProductData()
         setObservers()
     }
 
-
+    /**
+     * Method to initialise DaggerComponent
+     */
     private fun initialize() {
         homeScreenActivityComponent = DaggerHomeScreenActivityComponent.builder().build()
         homeScreenActivityComponent.inject(this)
     }
 
 
+    /**
+     * Method to initialise ViewModel
+     */
     private fun initializeViewModel() {
         homeActivityViewModel = ViewModelProvider(this, homeActivityViewModelFactory)
             .get(HomeViewModel::class.java)
     }
 
+    /**
+     * Method to fetch the Product List from  API
+     */
     private fun fetchProductData() = homeActivityViewModel.getProductData()
 
+    /**
+     * Method to set observer on data change from API End
+     */
     private fun setObservers() {
         homeActivityViewModel.product.observe(this, Observer {
             initializeRecyclerView(it!!)
         })
     }
 
+    /**
+     * Initialising recycler view and adapter
+     * based upon the data fetched and also
+     * receiving the callback from the item click on the adapter
+     */
     private fun initializeRecyclerView(it: Products) {
         homeItemAdapter = ProductListAdapter(it, itemSelected, object :
             ProductListAdapter.OnItemClick {
@@ -74,6 +88,7 @@ class HomeActivity : AppCompatActivity() {
                 setNotificationBadge()
             }
         })
+
         binding.productListRv.apply {
             this.layoutManager = LinearLayoutManager(this@HomeActivity)
             this.itemAnimator = DefaultItemAnimator()
@@ -81,6 +96,15 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    // Actions performed when item is added to cart
+    private fun itemAddedToCart(item: Item) {
+        if (!itemSelected.contains(item)) {
+            itemSelected.add(item)
+            homeItemAdapter.notifyDataSetChanged()
+        }
+    }
+
+    //Actions Performed when item is removed from the cart
     private fun removeItemFromCart(item: Item) {
         if (itemSelected.contains(item)) {
             itemSelected.remove(item)
@@ -88,6 +112,7 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    //Method to set the notification badges.
     private fun setNotificationBadge() {
         if (itemSelected.isNullOrEmpty()) {
             binding.notificationBadgeTv.visibility = View.GONE
@@ -97,12 +122,7 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun itemAddedToCart(item: Item) {
-        if (!itemSelected.contains(item)) {
-            itemSelected.add(item)
-            homeItemAdapter.notifyDataSetChanged()
-        }
+    fun openCartScreen(){
+
     }
-
-
 }

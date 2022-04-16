@@ -8,6 +8,10 @@
           name="selectedItemCount"
           type="String" />
 
+      <variable
+          name="activity"
+          type="com.manmohan.zivame.ui.activity.HomeActivity" />
+
   </data>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -34,8 +38,9 @@
             <RelativeLayout
                 android:layout_width="48dp"
                 android:layout_height="match_parent"
-                android:layout_marginEnd="8dp"
-                android:layout_alignParentEnd="true">
+                android:layout_alignParentEnd="true"
+                android:onClick="@{(view) -> activity.openCartScreen()}"
+                android:layout_marginEnd="8dp">
 
                 <ImageView
                     android:id="@+id/cart_icon"
@@ -49,20 +54,19 @@
                     android:id="@+id/notification_badge_tv"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:layout_alignParentBottom="true"
                     android:layout_alignParentEnd="true"
-                    android:elevation="2dp"
+                    android:layout_alignParentBottom="true"
                     android:layout_marginEnd="4dp"
                     android:layout_marginBottom="4dp"
-                    android:text="@{selectedItemCount}"
-                    android:visibility="gone"
-                    android:textSize="12sp"
+                    android:background="@drawable/badge_background"
+                    android:elevation="2dp"
                     android:fontFamily="@font/allan"
                     android:gravity="center"
+                    android:text="@{selectedItemCount}"
                     android:textColor="@color/white"
+                    android:textSize="12sp"
                     android:textStyle="bold"
-                    android:background="@drawable/badge_background"/>
-
+                    android:visibility="gone" />
 
 
             </RelativeLayout>
