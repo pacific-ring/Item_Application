@@ -45,7 +45,7 @@ internal class ProductListAdapter(private val product : Products,
 
     internal inner class ProductItemHolder(itemView: View)
         : RecyclerView.ViewHolder(itemView) {
-        
+
         private var itemImage : ImageView = itemView.findViewById(R.id.item_image)
         private var itemName : TextView = itemView.findViewById(R.id.item_name)
         private var itemSubHead : TextView = itemView.findViewById(R.id.item_sub_detail)

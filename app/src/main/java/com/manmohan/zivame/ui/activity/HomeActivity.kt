@@ -1,6 +1,9 @@
 package com.manmohan.zivame.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -17,6 +20,7 @@ import com.manmohan.zivame.model.Products
 import com.manmohan.zivame.ui.adapters.ProductListAdapter
 import com.manmohan.zivame.viewmodel.HomeViewModel
 import com.manmohan.zivame.viewmodel.factory.HomeViewModelFactory
+import java.io.Serializable
 import javax.inject.Inject
 
 class HomeActivity : AppCompatActivity() {
@@ -37,6 +41,13 @@ class HomeActivity : AppCompatActivity() {
         initializeViewModel()
         fetchProductData()
         setObservers()
+        setListeners()
+    }
+
+    private fun setListeners() {
+        binding.cartContainer.setOnClickListener {
+            openCartScreen()
+        }
     }
 
     /**
@@ -122,7 +133,12 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    fun openCartScreen(){
-
+    // Opens Cart Activity
+    private fun openCartScreen() {
+        val cartIntent: Intent = Intent(this, CartActivity::class.java)
+        cartIntent.putExtra("productList", itemSelected as Serializable)
+        startActivity(cartIntent)
     }
 }
+
+
