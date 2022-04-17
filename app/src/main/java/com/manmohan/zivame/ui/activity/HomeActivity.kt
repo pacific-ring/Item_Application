@@ -75,11 +75,9 @@ class HomeActivity : AppCompatActivity() {
     /**
      * Method to set observer on data change from API End
      */
-    private fun setObservers() {
-        homeActivityViewModel.product.observe(this, Observer {
-            initializeRecyclerView(it!!)
-        })
-    }
+    private fun setObservers() = homeActivityViewModel.product.observe(this, {
+        initializeRecyclerView(it!!)
+    })
 
     /**
      * Initialising recycler view and adapter
@@ -110,6 +108,7 @@ class HomeActivity : AppCompatActivity() {
     // Actions performed when item is added to cart
     private fun itemAddedToCart(item: Item) {
         if (!itemSelected.contains(item)) {
+            item.qty = 1
             itemSelected.add(item)
             homeItemAdapter.notifyDataSetChanged()
         }
@@ -118,19 +117,18 @@ class HomeActivity : AppCompatActivity() {
     //Actions Performed when item is removed from the cart
     private fun removeItemFromCart(item: Item) {
         if (itemSelected.contains(item)) {
+            item.qty = 0
             itemSelected.remove(item)
             homeItemAdapter.notifyDataSetChanged()
         }
     }
 
     //Method to set the notification badges.
-    private fun setNotificationBadge() {
-        if (itemSelected.isNullOrEmpty()) {
-            binding.notificationBadgeTv.visibility = View.GONE
-        } else {
-            binding.notificationBadgeTv.visibility = View.VISIBLE
-            binding.selectedItemCount = itemSelected.size.toString()
-        }
+    private fun setNotificationBadge() = if (itemSelected.isNullOrEmpty()) {
+        binding.notificationBadgeTv.visibility = View.GONE
+    } else {
+        binding.notificationBadgeTv.visibility = View.VISIBLE
+        binding.selectedItemCount = itemSelected.size.toString()
     }
 
     // Opens Cart Activity
