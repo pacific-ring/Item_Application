@@ -14,6 +14,7 @@ import com.manmohan.zivame.databinding.ActivityMainBinding
 import com.manmohan.zivame.model.Item
 import com.manmohan.zivame.model.Products
 import com.manmohan.zivame.ui.adapters.ProductListAdapter
+import com.manmohan.zivame.utils.Constants
 import com.manmohan.zivame.viewmodel.HomeViewModel
 import com.manmohan.zivame.viewmodel.factory.HomeViewModelFactory
 import java.io.Serializable
@@ -24,7 +25,9 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var homeActivityViewModel: HomeViewModel
     private lateinit var binding: ActivityMainBinding
     private lateinit var homeItemAdapter: ProductListAdapter
-    private val itemSelected: ArrayList<Item> = arrayListOf()
+    private var itemSelected: ArrayList<Item> = arrayListOf()
+
+
 
     @Inject
     lateinit var homeActivityViewModelFactory: HomeViewModelFactory
@@ -38,12 +41,6 @@ class HomeActivity : AppCompatActivity() {
         fetchProductData()
         setObservers()
         setListeners()
-    }
-
-    private fun setListeners() {
-        binding.cartContainer.setOnClickListener {
-            openCartScreen()
-        }
     }
 
     /**
@@ -133,9 +130,20 @@ class HomeActivity : AppCompatActivity() {
     // Opens Cart Activity
     private fun openCartScreen() {
         val cartIntent: Intent = Intent(this, CartActivity::class.java)
-        cartIntent.putExtra("productList", itemSelected as Serializable)
+        cartIntent.putExtra(Constants.PRODUCT_KEY, itemSelected as Serializable)
         startActivity(cartIntent)
     }
+
+    /**
+     * Setting onCLick listeners
+     */
+    private fun setListeners() {
+        binding.cartContainer.setOnClickListener {
+            openCartScreen()
+        }
+    }
+
+
 }
 
 
