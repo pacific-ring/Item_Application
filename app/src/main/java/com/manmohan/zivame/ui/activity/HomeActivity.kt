@@ -2,19 +2,15 @@ package com.manmohan.zivame.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Parcelable
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.manmohan.zivame.R
+import com.manmohan.zivame.ZivameApplication
 import com.manmohan.zivame.databinding.ActivityMainBinding
-import com.manmohan.zivame.di.components.DaggerHomeScreenActivityComponent
-import com.manmohan.zivame.di.components.HomeScreenActivityComponent
 import com.manmohan.zivame.model.Item
 import com.manmohan.zivame.model.Products
 import com.manmohan.zivame.ui.adapters.ProductListAdapter
@@ -24,7 +20,7 @@ import java.io.Serializable
 import javax.inject.Inject
 
 class HomeActivity : AppCompatActivity() {
-    private lateinit var homeScreenActivityComponent: HomeScreenActivityComponent
+
     private lateinit var homeActivityViewModel: HomeViewModel
     private lateinit var binding: ActivityMainBinding
     private lateinit var homeItemAdapter: ProductListAdapter
@@ -54,8 +50,7 @@ class HomeActivity : AppCompatActivity() {
      * Method to initialise DaggerComponent
      */
     private fun initialize() {
-        homeScreenActivityComponent = DaggerHomeScreenActivityComponent.builder().build()
-        homeScreenActivityComponent.inject(this)
+        (application as ZivameApplication).applicationComponent.inject(this)
     }
 
 
