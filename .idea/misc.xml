@@ -10,7 +10,8 @@
         <entry key="app/src/main/res/drawable/qty_item_box_bg.xml" value="0.375" />
         <entry key="app/src/main/res/drawable/selected_item_layout.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_cart.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.4395833333333333" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.2212962962962963" />
         <entry key="app/src/main/res/layout/item_layout.xml" value="0.375" />
         <entry key="app/src/main/res/layout/selected_item_layout.xml" value="0.335" />
       </map>
