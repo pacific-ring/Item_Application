@@ -79,8 +79,8 @@ class HomeActivity : AppCompatActivity() {
      * based upon the data fetched and also
      * receiving the callback from the item click on the adapter
      */
-    private fun initializeRecyclerView(it: Products) {
-        homeItemAdapter = ProductListAdapter(it, itemSelected, object :
+    private fun initializeRecyclerView(products: Products) {
+        homeItemAdapter = ProductListAdapter(products, itemSelected, object :
             ProductListAdapter.OnItemClick {
             override fun onAdd(item: Item) {
                 itemAddedToCart(item)
@@ -96,6 +96,10 @@ class HomeActivity : AppCompatActivity() {
         binding.productListRv.apply {
             this.layoutManager = LinearLayoutManager(this@HomeActivity)
             this.itemAnimator = DefaultItemAnimator()
+            if (products.items.isNotEmpty()) {
+                binding.datafetchAnimation.visibility = View.GONE
+                this.visibility = View.VISIBLE
+            }
             this.adapter = homeItemAdapter
         }
     }

@@ -3,6 +3,7 @@ package com.manmohan.zivame.ui.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -32,8 +33,10 @@ class CartActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         cartBinding = DataBindingUtil.setContentView(this, R.layout.activity_cart)
         selectedItemList = intent.getSerializableExtra("productList") as ArrayList<Item>
+
         initialize()
         displayItemInRecyclerView()
         initialiseView()
@@ -92,6 +95,11 @@ class CartActivity : AppCompatActivity() {
         cartBinding.selectedItemRv.apply {
             this.layoutManager = LinearLayoutManager(this@CartActivity)
             this.itemAnimator = DefaultItemAnimator()
+            if(!selectedItemList.isNullOrEmpty()){
+                cartBinding.footer.visibility = View.VISIBLE
+                this.visibility = View.VISIBLE
+                cartBinding.emptyCartContainer.visibility = View.GONE
+            }
             this.adapter = cartProductAdapter
         }
     }
