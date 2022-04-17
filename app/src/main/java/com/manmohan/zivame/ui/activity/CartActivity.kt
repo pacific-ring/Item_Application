@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
 import java.lang.*
 import javax.inject.Inject
 
-abstract class CartActivity : AppCompatActivity() {
+class CartActivity : AppCompatActivity() {
 
     private var selectedItemList : ArrayList<Item> = arrayListOf()
     private lateinit var cartProductAdapter: CartProductAdapter
@@ -120,6 +120,7 @@ abstract class CartActivity : AppCompatActivity() {
      * Opening Checkout Activity
      */
     private fun openCheckOutActivity() {
+        selectedItemList = arrayListOf()
         startActivity(Intent(this,CheckoutActivity ::class.java ))
         finish()
     }
