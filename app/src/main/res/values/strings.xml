@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Zivame</string>
     <string name="header_text">Zivame</string>
+    <string name="cart">Cart</string>
 </resources>
